@@ -1,15 +1,17 @@
 <?php
-$host = "localhost";
-$basededatos = "tienda";
-$user = "root"; 
-$password = ""; 
+$host = "aws-0-us-west-1.pooler.supabase.com";
+$usuario = "postgres.fbkljamdhlvfrwjguezi";
+$contraseña = "_s@ntT5BYEMWzi-";
+$nombreBaseDatos = "postgres";
+$puerto = "6543"; // Asegúrate de usar el puerto correcto
 
-$conn = new mysqli('localhost', 'root', '', 'tienda', 3306);
-
-if ($conn->connect_error) {
-    die("Error: " . $conn->connect_error);
+try {
+    $conn = new PDO("pgsql:host=$host;port=$puerto;dbname=$nombreBaseDatos", $usuario, $contraseña);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Conexión exitosa";
+} catch (PDOException $e) {
+    echo "Error de conexión: " . $e->getMessage();
 }
-
 include 'conexion.php';
 
 $sql = "SELECT * FROM productos";
