@@ -1,11 +1,17 @@
 <?php
-$host = "localhost";
-$basededatos = "tienda";
-$user = "root";
-$password = "";
+require 'vendor/autoload.php';
 
-$conn = new mysqli($host, $user, $password, $basededatos, 3306);
+$url = 'https://fbkljamdhlvfrwjguezi.supabase.co';
+$apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZia2xqYW1kaGx2ZnJ3amd1ZXppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI3MTIxMDYsImV4cCI6MjA0ODI4ODEwNn0.xNPK1LgBttlrasJcbTL8Z1_qblQktM7yvSjL8cevRpg';
 
-if ($conn->connect_error) {
-    die("Error:" . $conn->connect_error);
+$client = new \Supabase\SupabaseClient($url, $apiKey);
+
+// Consulta ejemplo
+$response = $client->from('productos')->select('codigo, nombre, detalle, imagen')->gte('codigo', 10)->execute();
+
+// Verifica el resultado
+if ($response->error) {
+    echo 'Error: ' . $response->error->message;
+} else {
+    print_r($response->data);
 }
