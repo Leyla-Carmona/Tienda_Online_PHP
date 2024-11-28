@@ -1,10 +1,10 @@
 <?php
 // Variables de conexión a la base de datos
-$host = "aws-0-us-west-1.pooler.supabase.com";
-$usuario = "postgres.fbkljamdhlvfrwjguezi";
-$contraseña = "_s@ntT5BYEMWzi-";
-$nombreBaseDatos = "postgres";
-$puerto = "6543"; // Asegúrate de usar el puerto correcto
+$host = getenv('DB_HOST');
+$usuario = getenv('DB_USER');
+$contraseña = getenv('DB_PASSWORD');
+$nombreBaseDatos = getenv('DB_NAME');
+$puerto = getenv('DB_PORT');
 
 // Crear la conexión con PDO
 try {
