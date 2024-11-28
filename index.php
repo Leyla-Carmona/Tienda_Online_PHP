@@ -13,7 +13,6 @@ try {
     echo "Error de conexión: " . $e->getMessage();
 }
 include 'conexion.php';
-
 $sql = "SELECT * FROM productos";
 $result = $conn->query($sql);
 ?>
@@ -33,7 +32,8 @@ $result = $conn->query($sql);
     <form action="vistacarrito.php" method="get">
         <input type="submit" value="Ver al carrito" style="margin-left:25px"></input>
     <div class="galeria" style="margin-top:25px">
-        <?php while ($row = $result->fetch_assoc()) { ?>
+    <?php while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>
+
             <div class="producto">
                 <img src="images/<?php echo $row['imagen']; ?>" alt="<?php echo $row['nombre']; ?>" width="150">
                 <h2><?php echo $row['nombre']; ?></h2>
