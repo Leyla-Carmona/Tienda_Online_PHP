@@ -5,9 +5,11 @@ $usuario = getenv('DB_USER');
 $contraseña = getenv('DB_PASSWORD');
 $nombreBaseDatos = getenv('DB_NAME');
 $puerto = getenv('DB_PORT');
-$port = getenv('PORT') ?: 8080; // Usa la variable de entorno PORT o el puerto 80 como predeterminado
-echo "Servidor escuchando en el puerto: $port\n";
-exec("php -S 0.0.0.0:$port");
+$port = getenv('APP_PORT') ?: 8080; // Usa la variable de entorno APP_PORT o 8080 como respaldo
+$host = "0.0.0.0"; // Escuchar en todas las interfaces de red
+
+// Iniciar el servidor PHP
+exec("php -S $host:$port");
 
 try {
     $conn = new PDO("pgsql:host=$host;port=$puerto;dbname=$nombreBaseDatos", $usuario, $contraseña);
